@@ -5,8 +5,136 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CMS"
         mc:Ignorable="d"
-        Title="Login Page" Height="450" Width="400">
-    <Grid>
+        Title="Login Page"
+        WindowStyle="None"
+        SizeToContent="WidthAndHeight"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+    <Canvas
+        Width="450"
+        Height="450">
+        <Path
+            Name="UIPath"
+            Stroke="DarkBlue"
+            StrokeThickness="1">
+            <Path.Fill>
+                <ImageBrush ImageSource="D:\Desktop\Projekat HCI\CMS\CMS\Images\Login.jpg"/>
+            </Path.Fill>
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="75,0">
+                        <LineSegment Point="0,75"/>
+                        <LineSegment Point="0,375"/>
+                        <LineSegment Point="75,450"/>
+                        <LineSegment Point="375,450"/>
+                        <LineSegment Point="450,375"/>
+                        <LineSegment Point="450,75"/>
+                        <LineSegment Point="375,0"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
         
-    </Grid>
+        
+
+        <Label x:Name="titleLabel" 
+               Content="LOGIN TO YOUR ACCOUNT" 
+               Margin="5" 
+               Canvas.Left="90" 
+               Canvas.Bottom="275"
+               FontFamily="Georgia" 
+               Width="275" 
+               Height="30" 
+               HorizontalContentAlignment="Center" 
+               FontSize="18" 
+               FontWeight="Bold">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="0.323"/>
+                    <GradientStop Color="White" Offset="0.249"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+
+        <Grid 
+            Canvas.Left="75" 
+            Canvas.Top="175" 
+            Width="300" 
+            Height="300" 
+            Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label 
+                x:Name="labelUsername" 
+                Content="Username:" 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                FontWeight="Bold" 
+                HorizontalContentAlignment="Stretch" 
+                VerticalContentAlignment="Stretch" Foreground="White"/>
+            <TextBox 
+                x:Name="usernameTextBox" 
+                Grid.Column="1" 
+                Grid.Row="0" 
+                Margin="5"/>
+
+            <Label 
+                x:Name="passwordLabel" 
+                Content="Password:" 
+                Grid.Row="1" 
+                Grid.Column="0" 
+                HorizontalContentAlignment="Stretch" 
+                VerticalContentAlignment="Stretch" 
+                FontWeight="Bold" Foreground="White"/>
+            <PasswordBox 
+                x:Name="passwordTextBox" 
+                Grid.Column="1" 
+                Grid.Row="1" 
+                Margin="5,5,5,5"/>
+
+            <Button 
+                x:Name="loginButton" 
+                Content="Login" 
+                Grid.Column="0" 
+                Grid.Row="2" 
+                Margin="5" 
+                Grid.ColumnSpan="2" 
+                HorizontalAlignment="Center" 
+                Width="100" 
+                Height="25" 
+                FontWeight="Bold"
+                Cursor="Hand"
+                ToolTip="Click here to login" Click="loginButton_Click"/>
+            
+            <Button 
+                x:Name="closeButton" 
+                Content="Close" 
+                Grid.Row="3" 
+                Grid.Column="0" 
+                Margin="5" 
+                Grid.ColumnSpan="2" 
+                HorizontalAlignment="Center" 
+                FontWeight="Bold" 
+                Width="100" 
+                Height="25"
+                Cursor="Hand"
+                ToolTip="Click here to exit the application"
+                Click="closeButton_Click"/>
+            
+            
+        </Grid>
+
+    </Canvas>
 </Window>
