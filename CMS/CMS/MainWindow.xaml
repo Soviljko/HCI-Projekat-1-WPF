@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
         xmlns:local="clr-namespace:CMS"
         mc:Ignorable="d"
         Title="Login Page"
@@ -10,7 +11,8 @@
         SizeToContent="WidthAndHeight"
         Background="Transparent"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Canvas
         Width="450"
         Height="450">
@@ -35,8 +37,14 @@
                 </PathGeometry>
             </Path.Data>
         </Path>
-        
-        
+
+        <Grid Canvas.Left="78" Canvas.Bottom="400" Height="84" Canvas.Top="23" Width="300" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <notifications:NotificationArea
+            x:Name="WindowNotificationArea"
+            Panel.ZIndex="1000"
+            MaxItems="3"
+            Position="TopRight" Margin="0,6,8,8"/>
+        </Grid>
 
         <Label x:Name="titleLabel" 
                Content="LOGIN TO YOUR ACCOUNT" 
@@ -88,7 +96,7 @@
                 x:Name="usernameTextBox" 
                 Grid.Column="1" 
                 Grid.Row="0" 
-                Margin="5"/>
+                Margin="5" GotFocus="usernameTextBox_GotFocus" LostFocus="usernameTextBox_LostFocus"/>
 
             <Label 
                 x:Name="passwordLabel" 
@@ -102,7 +110,7 @@
                 x:Name="passwordTextBox" 
                 Grid.Column="1" 
                 Grid.Row="1" 
-                Margin="5,5,5,5"/>
+                Margin="5,5,5,5" />
 
             <Button 
                 x:Name="loginButton" 
@@ -116,8 +124,9 @@
                 Height="25" 
                 FontWeight="Bold"
                 Cursor="Hand"
-                ToolTip="Click here to login" Click="loginButton_Click"/>
-            
+                ToolTip="Click here to login" 
+                Click="loginButton_Click"/>
+
             <Button 
                 x:Name="closeButton" 
                 Content="Close" 
@@ -132,8 +141,8 @@
                 Cursor="Hand"
                 ToolTip="Click here to exit the application"
                 Click="closeButton_Click"/>
-            
-            
+
+
         </Grid>
 
     </Canvas>

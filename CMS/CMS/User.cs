@@ -16,43 +16,45 @@ namespace CMS
     }
     public class User
     {
-        public string? Username { get; set; }
-        public string? Password { get; set; }
+
+        public string Username { get; set; }
+        public string Password { get; set; }
         public UserRole Role { get; set; }
 
         public User() { }
 
-        public User(string username,string password, UserRole role)
+        public User(string username, string password, UserRole role)
         {
-            this.Username = username;
-            this.Password = password;
-            this.Role = role;
+            Username = username;
+            Password = password;
+            Role = role;
         }
+    }
 
-        public static List<User> usersList;
+    public static class UserDataInitializer
+    {
+        // Staticka lista korisnika
+        public static List<User> users = new List<User>();
 
-        static User()
+        // Staticki konstruktor za inicijalizaciju
+        static UserDataInitializer()
         {
-            usersList = new List<User>
-            {
-                new User("admin","admin",UserRole.Admin),
-                new User("visitor","visitor",UserRole.Visitor)
-            };
+            // Dodavanje inicijalnih korisnika
+            users.Add(new User("admin", "admin", UserRole.Admin));
+            users.Add(new User("user", "user", UserRole.Visitor));
 
+            // Serijalizacija inicijalnih korisnika u XML datoteku
             SerializeUsers();
         }
 
+        // Metoda za serijalizaciju korisnika u XML fajl
         private static void SerializeUsers()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<User>));
-            using (FileStream stream = new FileStream("users.xml", FileMode.Create))
+            using (FileStream stream = new FileStream("Users.xml", FileMode.Create))
             {
-                serializer.Serialize(stream, usersList);
+                serializer.Serialize(stream, users);
             }
         }
-
-        
-
-
     }
 }

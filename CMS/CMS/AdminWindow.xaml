@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="AdminWindow" 
         Height="600" 
-        Width="800"
+        Width="700"
         WindowStyle="None"
         SizeToContent="WidthAndHeight"
         Background="Transparent"
@@ -20,7 +20,7 @@
     Height="500">
         <Path
         Name="UIPath"
-        Stroke="DarkBlue"
+        Stroke="#FF0B5AD9"
         StrokeThickness="1">
             <Path.Fill>
                 <ImageBrush ImageSource="D:\Desktop\Projekat HCI\CMS\CMS\Images\Login.jpg"/>
@@ -40,10 +40,72 @@
             </Path.Data>
         </Path>
 
+        <Grid Canvas.Left="10" Canvas.Top="10">
+            <Label x:Name="titleLabel" Content="Champions List" Margin="180,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" FontSize="36" FontStyle="Italic" FontWeight="Bold">
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <Button x:Name="addButton" Content="Add Champion" FontSize="25" Margin="71,414,223,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="addButton_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="closeButton" Content="Log Out" FontSize="25" Margin="305,414,64,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="closeButton_Click" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="deleteButton" Content="Delete" FontSize="25" Margin="461,414,-115,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="deleteButton_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <DataGrid x:Name="championsDataGrid" ItemsSource="{Binding Champions}" IsReadOnly="True" AutoGenerateColumns="False" BorderBrush="Black" BorderThickness="2" ColumnHeaderHeight="30" Margin="71,81,-115,-300">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Image" Width="Auto" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image x:Name="img" Source="{Binding Image}" Height="20"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Name" Width="Auto" CanUserResize="False" FontSize="15" Binding="{Binding ChampionName}"/>
+                    <DataGridTextColumn Header="Price" Width="Auto" CanUserResize="False" FontSize="15" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="Date" Width="Auto" CanUserResize="False" Binding="{Binding Date, StringFormat={}{0:dd/MM/yy}}"/>
+                    <DataGridTemplateColumn Header="Description" Width="Auto" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Read More">
+                                    <Hyperlink Click="Hyperlink_Click"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridCheckBoxColumn Header="Check Boxes"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
         <notifications:NotificationArea
          x:Name="WindowNotificationArea"
          Panel.ZIndex="1000"
          MaxItems="3"
-         Position="TopRight"/>  
+         Position="TopRight"/>
+
     </Canvas>
 </Window>

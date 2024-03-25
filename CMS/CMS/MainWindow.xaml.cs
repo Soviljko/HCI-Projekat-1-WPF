@@ -1,4 +1,6 @@
 ﻿using Notification.Wpf;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -21,12 +23,22 @@ namespace CMS
     {
         private NotificationManager notificationManager;
 
-        private List<User> Users = User.usersList;
+        public ObservableCollection<Champion> Champions;
+
+        public DataIO serializer = new DataIO();
         public MainWindow()
         {
             InitializeComponent();
 
             notificationManager = new NotificationManager();
+
+            usernameTextBox.Text = "Input username here";
+
+            Champions = serializer.DeSerializeObject<ObservableCollection<Champion>>("Champions.xml");
+            if(Champions == null)
+            {
+                Champions = new ObservableCollection<Champion>();
+            }
         }
 
         public void ShowToastNotification(ToastNotification toastNotification)
@@ -40,67 +52,72 @@ namespace CMS
             this.Close();
         }
 
+        private void SaveDataAsXML()
+        {
+            serializer.SerializeObject<ObservableCollection<Champion>>(Champions, "Champions.xml");
+        }
+
+
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            string username = usernameTextBox.Text;
-            string password = passwordTextBox.Password;
+            MainWindow mainWindow = new MainWindow();
 
-            User testUser = AuthenticateUser(username, password);
-
-            AddUser(testUser);
-
-            if(testUser != null)
+            try
             {
-                MessageBox.Show($"Dobrodosli, {testUser.Username}!");
+                string username = usernameTextBox.Text;
+                string password = passwordTextBox.Password;
 
-                if(testUser.Role == UserRole.Admin)
+                // Provera korisničkog imena i lozinke
+                User user = UserDataInitializer.users.FirstOrDefault(u => u.Username == username && u.Password == password);
+                if (user != null)
                 {
-                    AdminWindow adminWindow = new AdminWindow();
-                    adminWindow.Show();
+                    MessageBox.Show($"Dobrodošli, {user.Username}!");
+
+                    // Otvori odgovarajući prozor u zavisnosti od uloge korisnika
+                    if (user.Role == UserRole.Admin)
+                    {
+                        AdminWindow adminWindow = new AdminWindow();
+                        adminWindow.Show();
+                    }
+                    else
+                    {
+                        VisitorWindow visitorWindow = new VisitorWindow();
+                        visitorWindow.Show();
+                    }
+
+                    this.Close();
                 }
                 else
                 {
-                    VisitorWindow visitorWindow = new VisitorWindow();
-                    visitorWindow.Show();
+                    usernameTextBox.Text = "";
+                    passwordTextBox.Password = "";
+                    mainWindow.ShowToastNotification(new ToastNotification("Error", "User does not exist, please try again.", NotificationType.Information));
                 }
-
-                this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Pogresno korisnicko ime ili lozinka, probajte ponovo");
+                MessageBox.Show($"Došlo je do greške: {ex.Message}");
             }
 
         }
 
-        private void AddUser(User user)
+        private void usernameTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (!User.usersList.Any(u => u.Username == user.Username))
+            if(usernameTextBox.Text.Trim().Equals("Input username here"))
             {
-                User.usersList.Add(user);
-                SerializeUsers();
-            }
-            else
-            {
-                
-               // MessageBox.Show($"Korisnik {user.Username} već postoji.");
+                usernameTextBox.Text = "";
+                usernameTextBox.Foreground = Brushes.Black;
             }
         }
 
-        private User AuthenticateUser(string username, string password)
+        private void usernameTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            return Users.FirstOrDefault(u => u.Username == username && u.Password == password);
-        }
-
-        private static void SerializeUsers()
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<User>));
-            using (FileStream stream = new FileStream("users.xml", FileMode.Create))
+            if(usernameTextBox.Text.Trim().Equals(string.Empty))
             {
-                serializer.Serialize(stream, User.usersList);
+                usernameTextBox.Text = "Input username here";
+                usernameTextBox.Foreground = Brushes.DarkBlue;
             }
         }
-
 
     }
 }

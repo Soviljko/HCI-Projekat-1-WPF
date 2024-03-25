@@ -23,19 +23,44 @@ namespace CMS
     /// </summary>
     public partial class AdminWindow : Window
     {
-        
+        public ObservableCollection<Champion> Champions { get; set; }
+
+        MainWindow mainWindow = new MainWindow();
+
         public AdminWindow()
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            // MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
 
             InitializeComponent();
 
-            mainWindow.ShowToastNotification(new ToastNotification("Success",
-            "You have successfully logged in", NotificationType.Success));
+            DataContext = this;
+
+            Champions = new ObservableCollection<Champion>();
+            
 
         }
 
-        
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddWindow addWindow = new AddWindow();
+            addWindow.Show();
+        }
 
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+
+            mainWindow.Show();
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
