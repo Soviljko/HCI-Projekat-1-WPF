@@ -5,8 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CMS"
         mc:Ignorable="d"
-        Title="DetailedView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="DetailedView" Height="500" 
+        Width="700"
+        WindowStyle="None"
+        SizeToContent="WidthAndHeight"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Canvas
+        Width="700"
+        Height="500">
+        <Path
+            Name="UIPath"
+            Stroke="#FF0B5AD9"
+            StrokeThickness="1">
+            <Path.Fill>
+                <ImageBrush ImageSource="D:\Desktop\Projekat HCI\CMS\CMS\Images\Login.jpg"/>
+            </Path.Fill>
+
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="100,0">
+                        <LineSegment Point="0,100"/>
+                        <LineSegment Point="0,400"/>
+                        <LineSegment Point="100,500"/>
+                        <LineSegment Point="600,500"/>
+                        <LineSegment Point="700,400"/>
+                        <LineSegment Point="700,100"/>
+                        <LineSegment Point="600,0"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <Grid Height="500" Width="700">
+            <TextBox x:Name="nameTextBox" TextWrapping="Wrap" FontSize="24" FontWeight="Bold" FontFamily="Georgia" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Foreground="MediumOrchid" Margin="107,20,104,405"/>
+            <Image x:Name="largeImage" Margin="35,115,440,185" Height="200"/>
+            <RichTextBox x:Name="championDescriptionRichTextBox" Margin="271,119,10,177"/>
+            <TextBox x:Name="dateTextBox" Margin="39,378,448,72" FontSize="20" Background="Transparent" Foreground="MediumOrchid" BorderThickness="0"/>
+            <TextBox x:Name="priceTextBox" Margin="40,323,448,127" Background="Transparent" BorderThickness="0"/>
+            <Button x:Name="closeButton" Content="Go Back" FontSize="30" FontWeight="Bold" Margin="480,347,54,97" Click="closeButton_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="changeButton" Content="Change" FontSize="30" FontWeight="Bold" Margin="271,347,263,97">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+
+    </Canvas>
 </Window>

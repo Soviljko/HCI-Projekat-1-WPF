@@ -37,23 +37,6 @@ namespace CMS
             fontSizeComboBox.ItemsSource = new List<double> { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32 };
             fontFamilyComboBox.SelectedIndex = 2;
 
-            PropertyInfo[] properties = typeof(Colors).GetProperties(BindingFlags.Static | BindingFlags.Public);
-
-            List<string> colorNames = new List<string>();
-
-            foreach (PropertyInfo property in properties)
-            {
-                if (property.PropertyType == typeof(Color))
-                {
-                    string colorName = property.Name;
-                    colorNames.Add(colorName);
-                }
-            }
-
-            // Postavljamo izvor podataka ComboBox-a na listu imena boja
-            fontColorComboBox.ItemsSource = colorNames;
-
-            fontColorComboBox.SelectedIndex = 0;
         }
 
         private void fontFamilyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,13 +55,13 @@ namespace CMS
             }
         }
 
-        private void fontColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(fontColorComboBox.SelectedValue != null && !championDescriptionRichTextBox.Selection.IsEmpty)
-            {
-                championDescriptionRichTextBox.Selection.ApplyPropertyValue(Inline.ForegroundProperty, fontColorComboBox.SelectedValue);
-            }
-        }
+        //private void fontColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (fontColorComboBox.SelectedValue != null && !championDescriptionRichTextBox.Selection.IsEmpty)
+        //    {
+        //        championDescriptionRichTextBox.Selection.ApplyPropertyValue(Inline.ForegroundProperty, fontColorComboBox.SelectedValue);
+        //    }
+        //}
 
         private void championDescriptionRichTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -135,6 +118,7 @@ namespace CMS
                 Uri uri = new Uri(temp);
                 previewImage.Source = new BitmapImage(uri);
                 imageTextBox.Text = "";
+                imageTextBox.BorderBrush = Brushes.Transparent;
             }
         }
 
@@ -231,7 +215,7 @@ namespace CMS
                 }
             }
 
-            if(imageTextBox.Text.Trim().Equals("Image"))
+            if(imageTextBox.Text.Trim().Equals("Image Preview"))
             {
                 result = false;
                 borderImage.BorderBrush = Brushes.Red;
@@ -302,6 +286,14 @@ namespace CMS
             {
                 priceTextBox.Text = "Input price here";
                 priceTextBox.Foreground = Brushes.DarkGray;
+            }
+        }
+
+        private void colorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            if (colorPicker.SelectedColor != null && !championDescriptionRichTextBox.Selection.IsEmpty)
+            {
+                championDescriptionRichTextBox.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(colorPicker.SelectedColor.Value));
             }
         }
     }

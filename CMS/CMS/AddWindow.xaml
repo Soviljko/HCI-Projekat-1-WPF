@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:CMS"
         mc:Ignorable="d"
         Title="AddWindow"
@@ -69,11 +70,11 @@
                     </ToggleButton>
                     <Separator/>
 
-                    <ComboBox x:Name="fontFamilyComboBox" Width="100" SelectionChanged="fontFamilyComboBox_SelectionChanged"/>
+                    <ComboBox x:Name="fontFamilyComboBox" Width="85" SelectionChanged="fontFamilyComboBox_SelectionChanged"/>
                     <Separator/>
-                    <ComboBox x:Name="fontSizeComboBox" Width="100" SelectionChanged="fontSizeComboBox_SelectionChanged"/>
+                    <ComboBox x:Name="fontSizeComboBox" Width="85" SelectionChanged="fontSizeComboBox_SelectionChanged"/>
                     <Separator/>
-                    <ComboBox x:Name="fontColorComboBox" Width="100" SelectionChanged="fontColorComboBox_SelectionChanged"/>
+                    <xctk:ColorPicker Width="135" x:Name="colorPicker" DisplayColorAndName="True" SelectedColorChanged="colorPicker_SelectedColorChanged" />
                     <Separator/>
 
                     <StatusBar BorderThickness="2" BorderBrush="Black" Width="60">
@@ -90,8 +91,8 @@
                 BorderThickness="2">
             </RichTextBox>
 
-            <Image x:Name="previewImage" Width="110" Height="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="510,0,0,190"/>
-            <TextBox x:Name="imageTextBox" Text="Image" IsReadOnly="True" TextAlignment="Center" TextWrapping="Wrap" FontSize="15" Height="80" Width="106" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" BorderThickness="1" Margin="510,20,0,0">
+            <Image x:Name="previewImage" Width="147" Height="107" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="493,0,0,165"/>
+            <TextBox x:Name="imageTextBox" Text="Image Preview" IsReadOnly="True" TextAlignment="Center" TextWrapping="Wrap" FontSize="15" Height="98" Width="146" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" BorderThickness="1" Margin="490,32,0,0">
                 <TextBox.Foreground>
                     <SolidColorBrush Color="White" Opacity="1000"/>
                 </TextBox.Foreground>
@@ -100,7 +101,7 @@
                 </TextBox.Background>
             </TextBox>
 
-            <Border x:Name="borderImage" Margin="510,22,85,200"></Border>
+            <Border x:Name="borderImage" Margin="492,32,65,170"></Border>
 
             <Label x:Name="errorNameLabel" Content="" FontSize="10" BorderBrush="Transparent" Height="32" Canvas.Left="191" Canvas.Top="151" HorizontalAlignment="Left" VerticalAlignment="Top" Width="258" Margin="187,48,0,0"/>
 
