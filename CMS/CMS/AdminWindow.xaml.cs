@@ -23,9 +23,9 @@ namespace CMS
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public ObservableCollection<Champion> Champions { get; set; }
+        public static ObservableCollection<Champion>? Champions { get; set; }
 
-        MainWindow mainWindow = new MainWindow();
+        
 
         public AdminWindow()
         {
@@ -49,8 +49,9 @@ namespace CMS
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-
+            MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
+            
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -60,7 +61,8 @@ namespace CMS
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-
+            DetailedView detailedView = new DetailedView();
+            detailedView.Show();
         }
     }
 }

@@ -39,6 +39,8 @@ namespace CMS
             {
                 Champions = new ObservableCollection<Champion>();
             }
+
+            DataContext = this;
         }
 
         public void ShowToastNotification(ToastNotification toastNotification)

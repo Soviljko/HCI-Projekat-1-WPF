@@ -49,8 +49,8 @@
             <Label x:Name="descriptionLabel" Content="Champion Description" FontSize="15" BorderBrush="Black" BorderThickness="2" Margin="4,182,521,83" Background="White" FontWeight="Bold" Width="175" Height="35"/>
             <Button x:Name="imageButton" Content="Select Image" FontSize="15" BorderBrush="Black" BorderThickness="2" Margin="39,230,556,35" Background="White" FontWeight="Bold" Width="105" Height="35" Click="imageButton_Click"  />
 
-            <TextBox x:Name="nameTextBox" TextWrapping="Wrap" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="262" Margin="185,12,0,0"/>
-            <TextBox x:Name="priceTextBox" TextWrapping="Wrap" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="262" Margin="185,80,0,0"/>
+            <TextBox x:Name="nameTextBox" TextWrapping="Wrap" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="262" Margin="185,12,0,0" GotFocus="nameTextBox_GotFocus" LostFocus="nameTextBox_LostFocus"/>
+            <TextBox x:Name="priceTextBox" TextWrapping="Wrap" BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="32" Width="262" Margin="185,80,0,0" GotFocus="priceTextBox_GotFocus" LostFocus="priceTextBox_LostFocus"/>
 
             <!--Dock panel za toolbar-->
 
@@ -75,13 +75,14 @@
                     <Separator/>
                     <ComboBox x:Name="fontColorComboBox" Width="100" SelectionChanged="fontColorComboBox_SelectionChanged"/>
                     <Separator/>
+
                     <StatusBar BorderThickness="2" BorderBrush="Black" Width="60">
                         <TextBlock x:Name="numberOfWordsTextBlock" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" TextAlignment="Center"/>
                     </StatusBar>
                 </ToolBar>
             </DockPanel>
 
-            <RichTextBox Margin="189,182,15,-20"
+            <RichTextBox Margin="187,183,24,-16"
                 x:Name="championDescriptionRichTextBox"
                 TextChanged="championDescriptionRichTextBox_TextChanged" 
                 SelectionChanged="championDescriptionRichTextBox_SelectionChanged"
@@ -90,24 +91,26 @@
             </RichTextBox>
 
             <Image x:Name="previewImage" Width="110" Height="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="510,0,0,190"/>
-            <TextBox x:Name="imageTextBox" IsReadOnly="True" TextAlignment="Center" TextWrapping="Wrap" FontSize="15" Height="80" Width="106" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" BorderThickness="1" Margin="510,20,0,0">
+            <TextBox x:Name="imageTextBox" Text="Image" IsReadOnly="True" TextAlignment="Center" TextWrapping="Wrap" FontSize="15" Height="80" Width="106" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" BorderThickness="1" Margin="510,20,0,0">
                 <TextBox.Foreground>
-                    <SolidColorBrush Color="Transparent" Opacity="0"/>
+                    <SolidColorBrush Color="White" Opacity="1000"/>
                 </TextBox.Foreground>
                 <TextBox.Background>
                     <SolidColorBrush Color="Transparent" Opacity="0"/>
                 </TextBox.Background>
             </TextBox>
 
-            <Label x:Name="errorNameLabel" Content="" FontSize="10" BorderBrush="Transparent" Height="23" Canvas.Left="191" Canvas.Top="151" HorizontalAlignment="Left" VerticalAlignment="Top" Width="258" Margin="187,52,0,0"/>
+            <Border x:Name="borderImage" Margin="510,22,85,200"></Border>
+
+            <Label x:Name="errorNameLabel" Content="" FontSize="10" BorderBrush="Transparent" Height="32" Canvas.Left="191" Canvas.Top="151" HorizontalAlignment="Left" VerticalAlignment="Top" Width="258" Margin="187,48,0,0"/>
 
 
         </Grid>
 
-        <Label x:Name="errorPriceLabel" Content="" FontSize="10" BorderBrush="Transparent" Height="23" Width="258" HorizontalAlignment="Left" Canvas.Left="186" Canvas.Top="213" VerticalAlignment="Top"/>
+        <Label x:Name="errorPriceLabel" Content="" FontSize="10" BorderBrush="Transparent" Height="29" Width="258" HorizontalAlignment="Center" Canvas.Left="186" Canvas.Top="213" VerticalAlignment="Top"/>
 
-        <Border x:Name="imageBorder" Canvas.Left="39" Canvas.Top="376" Height="24" Width="110" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Label x:Name="imageErrorLabel" Margin="0,-12,0,12"/>
+        <Border x:Name="imageBorder" Canvas.Left="39" Canvas.Top="376" Height="34" Width="138" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label x:Name="imageErrorLabel"/>
         </Border>
 
         <Button x:Name="addButton" Content="Add New Champion" FontSize="15" FontWeight="Bold"  Canvas.Left="186" Canvas.Top="435" Height="39" Width="197" Click="addButton_Click">

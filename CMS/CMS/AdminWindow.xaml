@@ -13,7 +13,8 @@
         SizeToContent="WidthAndHeight"
         Background="Transparent"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
 
     <Canvas
     Width="700"
@@ -49,7 +50,7 @@
                     </LinearGradientBrush>
                 </Label.Foreground>
             </Label>
-            <Button x:Name="addButton" Content="Add Champion" FontSize="25" Margin="71,414,223,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="addButton_Click">
+            <Button x:Name="addButton" Content="Add Champion" FontSize="25" Margin="69,414,225,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="addButton_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -57,7 +58,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="closeButton" Content="Log Out" FontSize="25" Margin="305,414,64,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="closeButton_Click" >
+            <Button x:Name="closeButton" Content="Log Out" FontSize="25" Margin="299,414,70,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="closeButton_Click" >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -65,7 +66,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="deleteButton" Content="Delete" FontSize="25" Margin="461,414,-115,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="deleteButton_Click">
+            <Button x:Name="deleteButton" Content="Delete" FontSize="25" Margin="453,414,-107,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="deleteButton_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -74,28 +75,60 @@
                 </Button.Background>
             </Button>
 
-            <DataGrid x:Name="championsDataGrid" ItemsSource="{Binding Champions}" IsReadOnly="True" AutoGenerateColumns="False" BorderBrush="Black" BorderThickness="2" ColumnHeaderHeight="30" Margin="71,81,-115,-300">
+            <DataGrid x:Name="championsDataGrid" ItemsSource="{Binding Champions}" AutoGenerateColumns="False" BorderBrush="Black" BorderThickness="2" ColumnHeaderHeight="30" Width="550" Margin="71,81,-115,-300">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Image" Width="Auto" CanUserResize="False">
+                    <DataGridTemplateColumn Header="Image" Width="*" CanUserResize="False">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image x:Name="img" Source="{Binding Image}" Height="20"/>
+                                <Image x:Name="img" Source="{Binding Image}" Height="30"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Name" Width="Auto" CanUserResize="False" FontSize="15" Binding="{Binding ChampionName}"/>
-                    <DataGridTextColumn Header="Price" Width="Auto" CanUserResize="False" FontSize="15" Binding="{Binding Price}"/>
-                    <DataGridTextColumn Header="Date" Width="Auto" CanUserResize="False" Binding="{Binding Date, StringFormat={}{0:dd/MM/yy}}"/>
-                    <DataGridTemplateColumn Header="Description" Width="Auto" CanUserResize="False">
+                    <DataGridTextColumn Header="Name" Width="*" CanUserResize="False" FontSize="15" Binding="{Binding ChampionName}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Price" Width="*" CanUserResize="False" FontSize="15" Binding="{Binding Price}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Date" Width="*" CanUserResize="False" Binding="{Binding Date, StringFormat={}{0:dd/MM/yy}}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Description" Width="*" CanUserResize="False">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="Read More">
-                                    <Hyperlink Click="Hyperlink_Click"/>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Hyperlink Click="Hyperlink_Click">
+                                        <TextBlock Text="Read More" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Hyperlink>
                                 </TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridCheckBoxColumn Header="Check Boxes"/>
+
+                    <DataGridCheckBoxColumn Header="Check Boxes">
+                        <DataGridCheckBoxColumn.ElementStyle>
+                            <Style TargetType="{x:Type CheckBox}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridCheckBoxColumn.ElementStyle>
+                    </DataGridCheckBoxColumn>
+                    
                 </DataGrid.Columns>
             </DataGrid>
 
