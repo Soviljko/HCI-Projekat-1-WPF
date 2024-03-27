@@ -23,7 +23,7 @@ namespace CMS
     {
         private NotificationManager notificationManager;
 
-        public ObservableCollection<Champion> Champions;
+        public ObservableCollection<Champion> Champions = new ObservableCollection<Champion>();
 
         public DataIO serializer = new DataIO();
         public MainWindow()
@@ -34,13 +34,9 @@ namespace CMS
 
             usernameTextBox.Text = "Input username here";
 
-            Champions = serializer.DeSerializeObject<ObservableCollection<Champion>>("Champions.xml");
-            if(Champions == null)
-            {
-                Champions = new ObservableCollection<Champion>();
-            }
+            Champions.Add(new Champion(3150, "Blitzcrank", DateTime.Now, "D:\\Desktop\\Projekat HCI\\CMS\\CMS\\Images\\Yasuo.png", "Yasuo.rtf"));
+            Champions.Add(new Champion(1350, "Katarina", DateTime.Now, "D:\\Desktop\\Projekat HCI\\CMS\\CMS\\Images\\Akali.png", "Akali.rtf"));
 
-            DataContext = this;
         }
 
         public void ShowToastNotification(ToastNotification toastNotification)
@@ -51,12 +47,17 @@ namespace CMS
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                SaveDataAsXML();
+                Application.Current.Shutdown(); // Zatvara aplikaciju
+            }
         }
 
         private void SaveDataAsXML()
         {
-            serializer.SerializeObject<ObservableCollection<Champion>>(Champions, "Champions.xml");
+            serializer.SerializeObject<ObservableCollection<Champion>>(Champions,"Champions.xml");
         }
 
 

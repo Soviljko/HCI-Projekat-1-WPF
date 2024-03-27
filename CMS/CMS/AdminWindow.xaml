@@ -75,16 +75,16 @@
                 </Button.Background>
             </Button>
 
-            <DataGrid x:Name="championsDataGrid" ItemsSource="{Binding Champions}" AutoGenerateColumns="False" BorderBrush="Black" BorderThickness="2" ColumnHeaderHeight="30" Width="550" Margin="71,81,-115,-300">
+            <DataGrid x:Name="championsDataGrid" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Champions}" AutoGenerateColumns="False" BorderBrush="Black" BorderThickness="2" ColumnHeaderHeight="30" Width="550" Margin="71,81,-115,-300">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Image" Width="*" CanUserResize="False">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image x:Name="img" Source="{Binding Image}" Height="30"/>
+                                <Image x:Name="img" Source="{Binding Image}" Height="55"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Name" Width="*" CanUserResize="False" FontSize="15" Binding="{Binding ChampionName}">
+                    <DataGridTextColumn Header="Name" Width="*" CanUserResize="False" IsReadOnly="True" FontSize="15" Binding="{Binding ChampionName}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -92,7 +92,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Price" Width="*" CanUserResize="False" FontSize="15" Binding="{Binding Price}">
+                    <DataGridTextColumn Header="Price" Width="*" IsReadOnly="True" CanUserResize="False" FontSize="15" Binding="{Binding Price}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -100,7 +100,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Date" Width="*" CanUserResize="False" Binding="{Binding Date, StringFormat={}{0:dd/MM/yy}}">
+                    <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" CanUserResize="False" Binding="{Binding Date, StringFormat={}{0:dd/MM/yy}}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>

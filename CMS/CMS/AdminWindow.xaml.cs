@@ -23,21 +23,20 @@ namespace CMS
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public static ObservableCollection<Champion>? Champions { get; set; }
+        public static ObservableCollection<Champion> Champions { get; set; }
 
-        
+        MainWindow mainWindow = new MainWindow();
 
         public AdminWindow()
         {
-            // MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            // mainWindow = (MainWindow)Application.Current.MainWindow;
 
             InitializeComponent();
 
             DataContext = this;
 
-            Champions = new ObservableCollection<Champion>();
+            Champions = mainWindow.Champions;
             
-
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)

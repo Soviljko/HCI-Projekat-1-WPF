@@ -55,14 +55,6 @@ namespace CMS
             }
         }
 
-        //private void fontColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (fontColorComboBox.SelectedValue != null && !championDescriptionRichTextBox.Selection.IsEmpty)
-        //    {
-        //        championDescriptionRichTextBox.Selection.ApplyPropertyValue(Inline.ForegroundProperty, fontColorComboBox.SelectedValue);
-        //    }
-        //}
-
         private void championDescriptionRichTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
             object fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.FontStyleProperty);
