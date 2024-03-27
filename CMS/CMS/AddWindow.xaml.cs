@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,6 +23,7 @@ namespace CMS
     /// </summary>
     public partial class AddWindow : Window
     {
+
         public string temp = "";
         public AddWindow()
         {
@@ -34,8 +36,9 @@ namespace CMS
             priceTextBox.Foreground = Brushes.LightGray;
 
             fontFamilyComboBox.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
-            fontSizeComboBox.ItemsSource = new List<double> { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32 };
+            fontSizeComboBox.ItemsSource = new List<double> { 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32 };
             fontFamilyComboBox.SelectedIndex = 2;
+            
 
         }
 
@@ -57,11 +60,11 @@ namespace CMS
 
         private void championDescriptionRichTextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            object fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.FontStyleProperty);
-            italicToggleButton.IsChecked = (fontStyle != DependencyProperty.UnsetValue) && (fontStyle.Equals(FontStyles.Italic));
-
-            fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.FontWeightProperty);
+            object fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.FontWeightProperty);
             boldToggleButton.IsChecked = (fontStyle != DependencyProperty.UnsetValue) && (fontStyle.Equals(FontWeights.Bold));
+
+            fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.FontStyleProperty);
+            italicToggleButton.IsChecked = (fontStyle != DependencyProperty.UnsetValue) && (fontStyle.Equals(FontStyles.Italic));
 
             fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
             underlineToggleButton.IsChecked = (fontStyle != DependencyProperty.UnsetValue) && (fontStyle.Equals(TextDecorations.Underline));
@@ -72,7 +75,15 @@ namespace CMS
             fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.FontSizeProperty);
             fontSizeComboBox.Text = fontStyle.ToString();
 
-            fontStyle = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.ForegroundProperty);
+            object foreground = championDescriptionRichTextBox.Selection.GetPropertyValue(Inline.ForegroundProperty);
+
+            if (foreground is SolidColorBrush)
+            {
+                SolidColorBrush foregroundBrush = (SolidColorBrush)foreground;
+
+                colorPicker.SelectedColor = foregroundBrush.Color;
+            }
+
         }
 
         private int wordCounter()
@@ -88,7 +99,6 @@ namespace CMS
 
         private void championDescriptionRichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Pozivamo funkciju koja broji reči i ažuriramo brojač reči
             int numberOfWords = wordCounter();
             numberOfWordsTextBlock.Text = "Words: " + numberOfWords;
         }
@@ -99,7 +109,6 @@ namespace CMS
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            // Podešavanje opcija OpenFileDialog-a
             openFileDialog.Title = "Choose picture";
             openFileDialog.Filter = "Pictures (*.jpg, *.png)|*.jpg;*.png";
             openFileDialog.InitialDirectory = path;
@@ -116,9 +125,9 @@ namespace CMS
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            // AdminWindow adminWindow = (AdminWindow)Application.Current.MainWindow;
+            MainWindow mainWindow = new MainWindow();
 
-            if(validationOfUserInput())
+            if (validationOfUserInput())
             {
                 if(addButton.Content.Equals("Add New Champion"))
                 {
@@ -131,9 +140,17 @@ namespace CMS
                     stream = new FileStream(fileName, FileMode.Create);
                     textRange.Save(stream, DataFormats.Rtf);
                     stream.Close();
+
+                    AdminWindow.Champions.Add(new Champion(Int32.Parse(priceTextBox.Text), nameTextBox.Text, DateTime.Now, temp, fileName,false));
+
                     this.Close();
 
-                    AdminWindow.Champions.Add(new Champion(Int32.Parse(priceTextBox.Text), nameTextBox.Text, DateTime.Now, temp, fileName));
+                    // Kad se ovo odkomentarise, serijalizacija nece da radi kako treba???
+                    //AdminWindow adminWindow = new AdminWindow();
+
+                    //adminWindow.ShowToastNotification(new ToastNotification("Success"," You successfully added new champion",NotificationType.Success));
+
+
                 }
             }
             else
@@ -141,6 +158,8 @@ namespace CMS
                 MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        
 
         private bool validationOfUserInput()
         {
@@ -235,9 +254,6 @@ namespace CMS
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
-            AdminWindow adminWindow = new AdminWindow();
-            adminWindow.Show();
-
             this.Close();
         }
 

@@ -40,20 +40,12 @@
         </Path>
 
         <Grid Height="500" Width="700">
-            <TextBox x:Name="nameTextBox" TextWrapping="Wrap" FontSize="24" FontWeight="Bold" FontFamily="Georgia" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Foreground="MediumOrchid" Margin="107,20,104,405"/>
-            <Image x:Name="largeImage" Margin="35,115,440,185" Height="200"/>
-            <RichTextBox x:Name="championDescriptionRichTextBox" Margin="271,119,10,177"/>
-            <TextBox x:Name="dateTextBox" Margin="39,378,448,72" FontSize="20" Background="Transparent" Foreground="MediumOrchid" BorderThickness="0"/>
-            <TextBox x:Name="priceTextBox" Margin="40,323,448,127" Background="Transparent" BorderThickness="0"/>
-            <Button x:Name="closeButton" Content="Go Back" FontSize="30" FontWeight="Bold" Margin="480,347,54,97" Click="closeButton_Click">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="changeButton" Content="Change" FontSize="30" FontWeight="Bold" Margin="271,347,263,97">
+            <TextBox x:Name="nameTextBox" TextWrapping="Wrap" IsReadOnly="True" FontSize="40" FontStyle="Oblique" FontWeight="Bold" TextAlignment="Left" FontFamily="Georgia" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Foreground="White" Margin="271,63,79,362" Width="350"/>
+            <Image x:Name="largeImage" IsEnabled="False" Margin="20,115,455,185" Height="200"/>
+            <RichTextBox x:Name="championDescriptionRichTextBox" Background="Transparent" BorderThickness="0" IsReadOnly="True" Foreground="DarkGreen" Margin="271,119,10,177"/>
+            <TextBox x:Name="dateTextBox" IsReadOnly="True" Margin="39,378,448,72" FontSize="16" Background="Transparent" Foreground="White" TextAlignment="Center" BorderThickness="0"/>
+            <TextBox x:Name="priceTextBox" IsReadOnly="True" TextWrapping="Wrap" Margin="40,323,448,127" Background="Transparent" Foreground="White" FontSize="16" TextAlignment="Center"  BorderThickness="0"/>
+            <Button x:Name="closeButton" Content="Go Back" FontSize="30" FontWeight="Bold" Margin="271,338,220,106" Click="closeButton_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>

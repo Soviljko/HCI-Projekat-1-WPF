@@ -4,43 +4,39 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace CMS
 {
-    // Class for serialization and deserialization
     public class DataIO
     {
         public void SerializeObject<T>(T serializableObject, string fileName)
         {
-            if(serializableObject == null) { return; }
+            if (serializableObject == null) { return; }
 
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
                 XmlSerializer serializer = new XmlSerializer(serializableObject.GetType());
-
-                using(MemoryStream ms = new MemoryStream())
+                using (MemoryStream stream = new MemoryStream())
                 {
-                    serializer.Serialize(ms, serializableObject);
-                    ms.Position = 0;
-                    xmlDocument.Load(ms);
+                    serializer.Serialize(stream, serializableObject);
+                    stream.Position = 0;
+                    xmlDocument.Load(stream);
                     xmlDocument.Save(fileName);
-                    ms.Close();
+                    stream.Close();
                 }
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-
+                //Log exception here
             }
-
-
         }
 
         public T DeSerializeObject<T>(string fileName)
         {
-            if(string.IsNullOrEmpty(fileName)) { return default(T); }
+            if (string.IsNullOrEmpty(fileName)) { return default(T); }
 
             T objectOut = default(T);
 
@@ -52,25 +48,23 @@ namespace CMS
                 xmlDocument.Load(fileName);
                 string xmlString = xmlDocument.OuterXml;
 
-                using(StreamReader sr = new StreamReader(xmlString))
+                using (StringReader read = new StringReader(xmlString))
                 {
                     Type outType = typeof(T);
 
                     XmlSerializer serializer = new XmlSerializer(outType);
-
-                    using(XmlReader xmlr = new XmlTextReader(sr))
+                    using (XmlReader reader = new XmlTextReader(read))
                     {
-                        objectOut = (T)serializer.Deserialize(sr);
-                        xmlr.Close();
+                        objectOut = (T)serializer.Deserialize(reader);
+                        reader.Close();
                     }
 
-                    sr.Close();
-
+                    read.Close();
                 }
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-
+                //Log exception here
             }
 
             return objectOut;

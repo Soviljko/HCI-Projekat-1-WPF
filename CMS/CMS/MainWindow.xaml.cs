@@ -23,7 +23,7 @@ namespace CMS
     {
         private NotificationManager notificationManager;
 
-        public ObservableCollection<Champion> Champions = new ObservableCollection<Champion>();
+        public ObservableCollection<Champion> Champions;
 
         public DataIO serializer = new DataIO();
         public MainWindow()
@@ -34,8 +34,12 @@ namespace CMS
 
             usernameTextBox.Text = "Input username here";
 
-            Champions.Add(new Champion(3150, "Blitzcrank", DateTime.Now, "D:\\Desktop\\Projekat HCI\\CMS\\CMS\\Images\\Yasuo.png", "Yasuo.rtf"));
-            Champions.Add(new Champion(1350, "Katarina", DateTime.Now, "D:\\Desktop\\Projekat HCI\\CMS\\CMS\\Images\\Akali.png", "Akali.rtf"));
+            //Champions = new ObservableCollection<Champion>();
+
+            //Champions.Add(new Champion(3150, "Akali", DateTime.Now, "D:\\Desktop\\Projekat HCI\\CMS\\CMS\\Images\\Akali.png", "Yasuo.rtf"));
+            //Champions.Add(new Champion(6400, "Yasuo", DateTime.Now, "D:\\Desktop\\Projekat HCI\\CMS\\CMS\\Images\\Yasuo.png", "Ognjen.rtf"));
+
+            Champions = serializer.DeSerializeObject<ObservableCollection<Champion>>("Champions.xml");
 
         }
 
@@ -45,19 +49,19 @@ namespace CMS
            toastNotification.Message, toastNotification.Type, "WindowNotificationArea");
         }
 
+        private void SaveDataAsXML()
+        {
+            serializer.SerializeObject<ObservableCollection<Champion>>(Champions, "Champions.xml");
+        }
+
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to exit?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                SaveDataAsXML();
-                Application.Current.Shutdown(); // Zatvara aplikaciju
+                // SaveDataAsXML();
+                Application.Current.Shutdown();
             }
-        }
-
-        private void SaveDataAsXML()
-        {
-            serializer.SerializeObject<ObservableCollection<Champion>>(Champions,"Champions.xml");
         }
 
 
@@ -70,22 +74,22 @@ namespace CMS
                 string username = usernameTextBox.Text;
                 string password = passwordTextBox.Password;
 
-                // Provera korisničkog imena i lozinke
                 User user = UserDataInitializer.users.FirstOrDefault(u => u.Username == username && u.Password == password);
                 if (user != null)
                 {
-                    MessageBox.Show($"Dobrodošli, {user.Username}!");
 
-                    // Otvori odgovarajući prozor u zavisnosti od uloge korisnika
                     if (user.Role == UserRole.Admin)
                     {
                         AdminWindow adminWindow = new AdminWindow();
                         adminWindow.Show();
+                        adminWindow.ShowToastNotification(new ToastNotification("Welcome", "You successfully logged in", NotificationType.Success));
+
                     }
-                    else
+                    else if (user.Role == UserRole.Visitor)
                     {
                         VisitorWindow visitorWindow = new VisitorWindow();
                         visitorWindow.Show();
+                        visitorWindow.ShowToastNotification(new ToastNotification("Welcome", "You successfully logged in", NotificationType.Success));
                     }
 
                     this.Close();
@@ -94,7 +98,7 @@ namespace CMS
                 {
                     usernameTextBox.Text = "";
                     passwordTextBox.Password = "";
-                    mainWindow.ShowToastNotification(new ToastNotification("Error", "User does not exist, please try again.", NotificationType.Information));
+                    mainWindow.ShowToastNotification(new ToastNotification("Login Failed", "User does not exist, please try again.", NotificationType.Information));
                 }
             }
             catch (Exception ex)

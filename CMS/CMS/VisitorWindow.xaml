@@ -3,10 +3,143 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
         xmlns:local="clr-namespace:CMS"
         mc:Ignorable="d"
-        Title="VisitorWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="VisitorWindow" 
+        Height="600" 
+        Width="700"
+        WindowStyle="None"
+        SizeToContent="WidthAndHeight"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Canvas
+        Width="700"
+        Height="500">
+        <Path
+        Name="UIPath"
+        Stroke="#FF0B5AD9"
+        StrokeThickness="1">    
+            <Path.Fill>
+                <ImageBrush ImageSource="D:\Desktop\Projekat HCI\CMS\CMS\Images\Login.jpg"/>
+            </Path.Fill>
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="100,0">
+                        <LineSegment Point="0,100"/>
+                        <LineSegment Point="0,400"/>
+                        <LineSegment Point="100,500"/>
+                        <LineSegment Point="600,500"/>
+                        <LineSegment Point="700,400"/>
+                        <LineSegment Point="700,100"/>
+                        <LineSegment Point="600,0"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <Grid Canvas.Left="10" Canvas.Top="10">
+            <Button x:Name="addButton" Visibility="Hidden" Content="Add Champion" FontSize="25" Margin="71,382,223,-354" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label x:Name="titleLabel" Content="Champions List" Margin="71,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" FontSize="36" FontStyle="Italic" FontWeight="Bold">
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <Button x:Name="closeButton" Content="Log Out" FontSize="25" Margin="346,382,-115,-354" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="closeButton_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF0B5AD9" Offset="0.501"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <DataGrid 
+        x:Name="championsDataGrid" 
+        CanUserAddRows="False" 
+        ScrollViewer.CanContentScroll="True" 
+        ScrollViewer.VerticalScrollBarVisibility="Auto" 
+        ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+        ItemsSource="{Binding Champions, UpdateSourceTrigger=PropertyChanged}" 
+        AutoGenerateColumns="False" 
+        BorderBrush="Black" 
+        BorderThickness="2" 
+        ColumnHeaderHeight="30" 
+        Width="550" 
+        Height="280" 
+        Margin="71,81,-115,-300"
+        SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Image" Width="*" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image x:Name="img" Source="{Binding Image}" Height="55"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Name" Width="*" CanUserResize="False" IsReadOnly="True" FontSize="15" Binding="{Binding ChampionName}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Price" Width="*" IsReadOnly="True" CanUserResize="False" FontSize="15" Binding="{Binding Price}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Date" Width="*" IsReadOnly="True" CanUserResize="False" Binding="{Binding Date, StringFormat={}{0:dd/MM/yy}}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Description" Width="*" CanUserResize="False">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Hyperlink Click="Hyperlink_Click">
+                                <TextBlock Text="Read More" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Hyperlink>
+                        </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+        <notifications:NotificationArea
+         x:Name="WindowNotificationArea"
+             Panel.ZIndex="1000"
+             MaxItems="3"
+             Position="TopRight" 
+             Height="66" 
+            Width="318" 
+            Canvas.Left="296" 
+            Canvas.Top="18" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>
+    </Canvas>
 </Window>

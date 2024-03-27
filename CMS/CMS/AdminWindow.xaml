@@ -42,7 +42,7 @@
         </Path>
 
         <Grid Canvas.Left="10" Canvas.Top="10">
-            <Label x:Name="titleLabel" Content="Champions List" Margin="180,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" FontSize="36" FontStyle="Italic" FontWeight="Bold">
+            <Label x:Name="titleLabel" Content="Champions List" Margin="71,23,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Georgia" FontSize="36" FontStyle="Italic" FontWeight="Bold">
                 <Label.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -50,7 +50,7 @@
                     </LinearGradientBrush>
                 </Label.Foreground>
             </Label>
-            <Button x:Name="addButton" Content="Add Champion" FontSize="25" Margin="69,414,225,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="addButton_Click">
+            <Button x:Name="addButton" Content="Add Champion" FontSize="25" Margin="71,382,223,-354" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="addButton_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -58,7 +58,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="closeButton" Content="Log Out" FontSize="25" Margin="299,414,70,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="closeButton_Click" >
+            <Button x:Name="closeButton" Content="Log Out" FontSize="25" Margin="484,382,-115,-354" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="closeButton_Click" >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -66,7 +66,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button x:Name="deleteButton" Content="Delete" FontSize="25" Margin="453,414,-107,-386" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="deleteButton_Click">
+            <Button x:Name="deleteButton" Content="Delete" FontSize="25" Margin="304,382,42,-354" FontFamily="Georgia" FontWeight="Bold" FontStyle="Normal" Click="deleteButton_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -75,7 +75,21 @@
                 </Button.Background>
             </Button>
 
-            <DataGrid x:Name="championsDataGrid" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Champions}" AutoGenerateColumns="False" BorderBrush="Black" BorderThickness="2" ColumnHeaderHeight="30" Width="550" Margin="71,81,-115,-300">
+            <DataGrid 
+                x:Name="championsDataGrid" 
+                CanUserAddRows="False" 
+                ScrollViewer.CanContentScroll="True" 
+                ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                ItemsSource="{Binding Champions, UpdateSourceTrigger=PropertyChanged}" 
+                AutoGenerateColumns="False" 
+                BorderBrush="Black" 
+                BorderThickness="2" 
+                ColumnHeaderHeight="30" 
+                Width="550" 
+                Height="280" 
+                Margin="71,81,-115,-300"
+                SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Image" Width="*" CanUserResize="False">
                         <DataGridTemplateColumn.CellTemplate>
@@ -120,7 +134,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridCheckBoxColumn Header="Check Boxes">
+                    <DataGridCheckBoxColumn Header="Check Boxes" Binding="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}">
                         <DataGridCheckBoxColumn.ElementStyle>
                             <Style TargetType="{x:Type CheckBox}">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -128,7 +142,7 @@
                             </Style>
                         </DataGridCheckBoxColumn.ElementStyle>
                     </DataGridCheckBoxColumn>
-                    
+
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -138,7 +152,7 @@
          x:Name="WindowNotificationArea"
          Panel.ZIndex="1000"
          MaxItems="3"
-         Position="TopRight"/>
+         Position="TopRight" Height="66" Width="318" Canvas.Left="296" Canvas.Top="18" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
     </Canvas>
 </Window>

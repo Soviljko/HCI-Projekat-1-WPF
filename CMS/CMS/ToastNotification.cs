@@ -24,7 +24,7 @@ namespace CMS
         {
             Title = title;
             Message = message;
-            Type = Type;
+            Type = nt;
         }
     }
 }
