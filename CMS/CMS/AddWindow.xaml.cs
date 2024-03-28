@@ -131,17 +131,17 @@ namespace CMS
             {
                 if(addButton.Content.Equals("Add New Champion"))
                 {
-                    string fileName = "";
-                    fileName = nameTextBox.Text + ".rtf";
+                    string rtfFileName = "";
+                    rtfFileName = nameTextBox.Text + ".rtf";
 
                     TextRange textRange;
                     FileStream stream;
                     textRange = new TextRange(championDescriptionRichTextBox.Document.ContentStart, championDescriptionRichTextBox.Document.ContentEnd);
-                    stream = new FileStream(fileName, FileMode.Create);
+                    stream = new FileStream(rtfFileName, FileMode.Create);
                     textRange.Save(stream, DataFormats.Rtf);
                     stream.Close();
 
-                    AdminWindow.Champions.Add(new Champion(Int32.Parse(priceTextBox.Text), nameTextBox.Text, DateTime.Now, temp, fileName,false));
+                    AdminWindow.Champions.Add(new Champion(Int32.Parse(priceTextBox.Text), nameTextBox.Text, DateTime.Now, temp, rtfFileName,false));
 
                     this.Close();
 
@@ -150,12 +150,14 @@ namespace CMS
 
                     //adminWindow.ShowToastNotification(new ToastNotification("Success"," You successfully added new champion",NotificationType.Success));
 
+                    MessageBox.Show("You successfully added new champion", "Addition Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+
 
                 }
             }
             else
             {
-                MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please fill in all fields correctly!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

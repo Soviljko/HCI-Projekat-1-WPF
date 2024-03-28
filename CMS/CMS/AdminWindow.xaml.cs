@@ -78,6 +78,8 @@ namespace CMS
                 {
                     Champions.Remove(champion);
                 }
+
+                MessageBox.Show("You successfully deleted selected champions", "Deletion Successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if(result == MessageBoxResult.No)
             {
@@ -89,8 +91,8 @@ namespace CMS
         }
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            //EditWindow editWindow = new EditWindow(championsDataGrid.SelectedIndex);
-            //editWindow.Show();
+            EditWindow editWindow = new EditWindow(championsDataGrid.SelectedIndex);
+            editWindow.Show();
         }
     }
 }

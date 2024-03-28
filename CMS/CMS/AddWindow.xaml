@@ -92,7 +92,7 @@
             </RichTextBox>
 
             <Image x:Name="previewImage" Width="175" Height="133" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="482,0,0,179"/>
-            <TextBox x:Name="imageTextBox" IsEnabled="False" Text="Image Preview" IsReadOnly="True" TextAlignment="Center" TextWrapping="Wrap" FontSize="15" Height="130" Width="175" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Transparent" BorderThickness="1" Margin="482,-9,0,0">
+            <TextBox x:Name="imageTextBox" IsEnabled="False" Text="Image Preview" IsReadOnly="True" TextAlignment="Center" TextWrapping="Wrap" FontSize="15" Height="130" Width="175" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Transparent" BorderThickness="1" Margin="482,-20,0,0">
                 <TextBox.Foreground>
                     <SolidColorBrush Color="White" Opacity="1000"/>
                 </TextBox.Foreground>

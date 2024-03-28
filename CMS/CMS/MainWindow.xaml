@@ -95,32 +95,37 @@
             <TextBox 
                 x:Name="usernameTextBox" 
                 Grid.Column="1" 
-                Grid.Row="0" 
-                Margin="5" GotFocus="usernameTextBox_GotFocus" LostFocus="usernameTextBox_LostFocus"/>
+                Grid.Row="0"
+                Height="25"
+                Margin="1,2,9,8" 
+                GotFocus="usernameTextBox_GotFocus" 
+                LostFocus="usernameTextBox_LostFocus"
+                VerticalAlignment="Center"/>
 
             <Label 
                 x:Name="passwordLabel" 
                 Content="Password:" 
-                Grid.Row="1" 
+                Grid.Row="2" 
                 Grid.Column="0" 
                 HorizontalContentAlignment="Stretch" 
                 VerticalContentAlignment="Stretch" 
-                FontWeight="Bold" Foreground="White"/>
+                FontWeight="Bold" Foreground="White" Grid.ColumnSpan="2" Margin="3,7,227,27"/>
             <PasswordBox 
                 x:Name="passwordTextBox" 
-                Grid.Column="1" 
-                Grid.Row="1" 
-                Margin="5,5,5,5" />
+                Grid.Column="1"
+                Height="25"
+                Grid.Row="2" 
+                Margin="1,8,9,0"
+                VerticalAlignment="Top"/>
 
             <Button 
                 x:Name="loginButton" 
                 Content="Login" 
-                Grid.Column="0" 
+                Grid.Column="1" 
                 Grid.Row="2" 
-                Margin="5" 
-                Grid.ColumnSpan="2" 
-                HorizontalAlignment="Center" 
-                Width="100" 
+                Margin="1,45,0,18" 
+                HorizontalAlignment="Left" 
+                Width="110"Width="106" 
                 Height="25" 
                 FontWeight="Bold"
                 Cursor="Hand"
@@ -130,13 +135,12 @@
             <Button 
                 x:Name="closeButton" 
                 Content="Close" 
-                Grid.Row="3" 
-                Grid.Column="0" 
-                Margin="5" 
-                Grid.ColumnSpan="2" 
-                HorizontalAlignment="Center" 
+                Grid.Row="2" 
+                Grid.Column="1" 
+                Margin="115,45,0,18" 
+                HorizontalAlignment="Left" 
                 FontWeight="Bold" 
-                Width="100" 
+                Width="106" 
                 Height="25"
                 Cursor="Hand"
                 ToolTip="Click here to exit the application"

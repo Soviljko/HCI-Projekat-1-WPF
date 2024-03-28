@@ -98,7 +98,7 @@ namespace CMS
                 {
                     usernameTextBox.Text = "";
                     passwordTextBox.Password = "";
-                    mainWindow.ShowToastNotification(new ToastNotification("Login Failed", "User does not exist, please try again.", NotificationType.Information));
+                    mainWindow.ShowToastNotification(new ToastNotification("Login Failed", "User does not exist, please try again.", NotificationType.Warning));
                 }
             }
             catch (Exception ex)

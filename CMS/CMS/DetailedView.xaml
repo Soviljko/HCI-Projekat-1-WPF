@@ -42,7 +42,7 @@
         <Grid Height="500" Width="700">
             <TextBox x:Name="nameTextBox" TextWrapping="Wrap" IsReadOnly="True" FontSize="40" FontStyle="Oblique" FontWeight="Bold" TextAlignment="Left" FontFamily="Georgia" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Foreground="White" Margin="271,63,79,362" Width="350"/>
             <Image x:Name="largeImage" IsEnabled="False" Margin="20,115,455,185" Height="200"/>
-            <RichTextBox x:Name="championDescriptionRichTextBox" Background="Transparent" BorderThickness="0" IsReadOnly="True" Foreground="DarkGreen" Margin="271,119,10,177"/>
+            <RichTextBox x:Name="championDescriptionRichTextBox" Background="WhiteSmoke" BorderThickness="0" IsReadOnly="True" Foreground="DarkGreen" Margin="271,119,10,177"/>
             <TextBox x:Name="dateTextBox" IsReadOnly="True" Margin="39,378,448,72" FontSize="16" Background="Transparent" Foreground="White" TextAlignment="Center" BorderThickness="0"/>
             <TextBox x:Name="priceTextBox" IsReadOnly="True" TextWrapping="Wrap" Margin="40,323,448,127" Background="Transparent" Foreground="White" FontSize="16" TextAlignment="Center"  BorderThickness="0"/>
             <Button x:Name="closeButton" Content="Go Back" FontSize="30" FontWeight="Bold" Margin="271,338,220,106" Click="closeButton_Click">
