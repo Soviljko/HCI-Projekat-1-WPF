@@ -91,7 +91,7 @@
                 BorderThickness="2">
             </RichTextBox>
 
-            <Image x:Name="previewImage" Width="175" Height="133" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="482,0,0,179"/>
+            <Image x:Name="previewImage" Width="175" Height="133" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="482,0,0,167"/>
             <TextBox x:Name="imageTextBox" IsEnabled="False" Text="Image Preview" IsReadOnly="True" TextAlignment="Center" TextWrapping="Wrap" FontSize="15" Height="130" Width="175" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Transparent" BorderThickness="1" Margin="482,-20,0,0">
                 <TextBox.Foreground>
                     <SolidColorBrush Color="White" Opacity="1000"/>
@@ -101,7 +101,7 @@
                 </TextBox.Background>
             </TextBox>
 
-            <Border x:Name="borderImage" IsEnabled="False" Margin="482,-9,43,179"></Border>
+            <Border x:Name="borderImage" IsEnabled="False" Margin="482,-1,43,171"></Border>
 
             <Label x:Name="errorNameLabel" Content="" FontSize="10" BorderBrush="Transparent" Height="32" Canvas.Left="191" Canvas.Top="151" HorizontalAlignment="Left" VerticalAlignment="Top" Width="258" Margin="187,48,0,0"/>
 
