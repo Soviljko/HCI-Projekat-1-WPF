@@ -125,7 +125,7 @@
                 Grid.Row="2" 
                 Margin="1,45,0,18" 
                 HorizontalAlignment="Left" 
-                Width="110"Width="106" 
+                Width="106" 
                 Height="25" 
                 FontWeight="Bold"
                 Cursor="Hand"
